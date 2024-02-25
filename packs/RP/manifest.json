@@ -1,0 +1,26 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": ["NaKeR"],
+    "generated_with": {
+      "bridge": ["2.7.8"],
+      "dash": [
+        "github:bridge-core/dash-compiler#8fa35c73292f6382747d0f411fca26431a6d2c8e"
+      ]
+    }
+  },
+  "header": {
+    "name": "Project Raindrop",
+    "description": "Game engine in MCBE",
+    "min_engine_version": [1, 20, 50],
+    "uuid": "2c2ad051-9d88-4099-a99a-0a4cdcef6a91",
+    "version": [1, 0, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "dc7a36d1-03c6-4a2b-8b3e-82523784db91",
+      "version": [1, 0, 0]
+    }
+  ]
+}

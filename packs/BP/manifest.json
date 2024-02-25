@@ -1,0 +1,47 @@
+{
+  "format_version": 2,
+  "metadata": {
+    "authors": ["NaKeR"],
+    "generated_with": {
+      "bridge": ["2.7.8"],
+      "dash": [
+        "github:bridge-core/dash-compiler#8fa35c73292f6382747d0f411fca26431a6d2c8e"
+      ]
+    }
+  },
+  "header": {
+    "name": "Project Raindrop",
+    "description": "Game engine in MCBE",
+    "min_engine_version": [1, 20, 50],
+    "uuid": "c7d825a8-c8e8-496e-9a89-23e4ed973207",
+    "version": [1, 0, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "3d6f70bc-ec0d-42a7-964d-f30959a474a2",
+      "version": [1, 0, 0]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "1ae03ef2-8938-4365-bb3d-e1874dcc6e37",
+      "entry": "scripts/main.js",
+      "version": [1, 0, 0]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.9.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-gametest",
+      "version": "1.0.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "1.2.0-beta"
+    }
+  ]
+}
