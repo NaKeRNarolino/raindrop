@@ -37,9 +37,9 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       const o = { red: 1, green: 0.5, blue: 0, alpha: 1 };
       const DataStorage = new rd.MassiveJSONStorage("rd:screen_data");
       data[1][0][0] = v;
-      data[1][0][1] = v;
-      data[1][1][0] = v;
-      data[1][1][1] = v;
+      data[1][0][1] = { red: 0.5, green: 0, blue: 1, alpha: 1 };
+      data[1][1][0] = { red: 0.5, green: 0, blue: 1, alpha: 1 };
+      data[1][1][1] = { red: 0, green: 0, blue: 1, alpha: 1 };
       DataStorage.write(data);
       display.data = DataStorage;
 
@@ -53,8 +53,8 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       mc.system.runTimeout(() => {
         let it = 0;
         mc.system.runInterval(() => {
-          if (it <= 5) {
-            vp.move({ x: 1, y: 0 });
+          if (it < 1) {
+            vp.move({ x: 2, y: 0 });
           }
           it++;
         }, 5);
