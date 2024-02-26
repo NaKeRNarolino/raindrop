@@ -42,4 +42,22 @@ export class Drop {
     pairedData[this.layer][this.position.y][this.position.x] = this.view;
     this.data.write(pairedData);
   }
+
+  collidesWithLayer(layer: number): boolean {
+    let pairedData = this.data.access() as mc.RGBA[][][];
+    return pairedData[layer][this.position.y][this.position.x].alpha != 0;
+  }
+
+  teleport(vector: mc.Vector2) {
+    let pairedData = this.data.access() as mc.RGBA[][][];
+    pairedData[this.layer][this.position.y][this.position.x] = {
+      red: 0,
+      green: 0,
+      blue: 0,
+      alpha: 0,
+    };
+    this.position = vector;
+    pairedData[this.layer][this.position.y][this.position.x] = this.view;
+    this.data.write(pairedData);
+  }
 }

@@ -27,4 +27,20 @@ export class Drop {
         pairedData[this.layer][this.position.y][this.position.x] = this.view;
         this.data.write(pairedData);
     }
+    collidesWithLayer(layer) {
+        let pairedData = this.data.access();
+        return pairedData[layer][this.position.y][this.position.x].alpha != 0;
+    }
+    teleport(vector) {
+        let pairedData = this.data.access();
+        pairedData[this.layer][this.position.y][this.position.x] = {
+            red: 0,
+            green: 0,
+            blue: 0,
+            alpha: 0,
+        };
+        this.position = vector;
+        pairedData[this.layer][this.position.y][this.position.x] = this.view;
+        this.data.write(pairedData);
+    }
 }

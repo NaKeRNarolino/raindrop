@@ -1,6 +1,5 @@
 import * as mc from "@minecraft/server";
 import * as ui from "@minecraft/server-ui";
-import stringByteSlice from "string-byte-slice";
 
 export function FlattenRGBA3DMatrix(
   matrix: mc.RGBA[][][],
