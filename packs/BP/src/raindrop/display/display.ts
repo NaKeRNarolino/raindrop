@@ -67,4 +67,19 @@ export class Display {
       }
     });
   }
+
+  fillWithColor(
+    color: mc.RGBA,
+    position: mc.Vector2,
+    size: mc.Vector2,
+    layer: number
+  ) {
+    let pd = this.data.access() as mc.RGBA[][][];
+    for (let i = position.y; i < size.y; i++) {
+      for (let j = position.x; j < size.x; j++) {
+        pd[layer][i][j] = color;
+      }
+    }
+    this.data.write(pd);
+  }
 }

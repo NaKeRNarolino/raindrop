@@ -48,6 +48,8 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       DataStorage.write(data);
       display.data = DataStorage;
 
+      display.fillWithColor(w, { x: 0, y: 0 }, { x: 1, y: 4 }, 1);
+
       let ri = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
         x: 1,
         y: 4,
@@ -56,12 +58,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       display.startDrawing();
 
       mc.system.runTimeout(() => {
-        let it = 0;
-        mc.system.runInterval(() => {
-          if (it < 4) {
-          }
-          it++;
-        }, 5);
+        mc.system.runInterval(() => {}, 5);
       }, 60);
     });
   }

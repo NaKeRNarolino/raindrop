@@ -41,4 +41,13 @@ export class Display {
             }
         });
     }
+    fillWithColor(color, position, size, layer) {
+        let pd = this.data.access();
+        for (let i = position.y; i < size.y; i++) {
+            for (let j = position.x; j < size.x; j++) {
+                pd[layer][i][j] = color;
+            }
+        }
+        this.data.write(pd);
+    }
 }
