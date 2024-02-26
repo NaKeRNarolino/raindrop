@@ -4,16 +4,28 @@ export class RectangleDrop {
         this.data = pairedData;
         this.layer = layer;
         this.size = size;
+        this._getView();
+    }
+    _getView() {
+        const pd = this.data.access();
+        this.view = [];
+        for (let i = 0; i < this.size.y; i++) {
+            for (let j = 0; j < this.size.x; j++) {
+                this.view.push({
+                    coordinates: {
+                        x: j,
+                        y: i,
+                    },
+                    color: pd[this.layer][this.position.y + i][this.position.x + j],
+                });
+            }
+        }
     }
     move(vector) {
         const pd = this.data.access();
-        let oc = Array(pd.length).fill(Array(this.size.y).fill(Array(this.size.x)));
-        for (let y = 0; y < this.size.y; y++) {
-            for (let x = 0; x < this.size.x; x++) {
-                oc[this.layer][y][x] =
-                    pd[this.layer][this.position.y + y][this.position.x + x];
-                console.warn(`${x} ${y} ${JSON.stringify(oc[this.layer][y][x])}`);
-                pd[this.layer][this.position.y + y][this.position.x + x] = {
+        for (let i = 0; i < this.size.y; i++) {
+            for (let j = 0; j < this.size.x; j++) {
+                pd[this.layer][this.position.y + i][this.position.x + j] = {
                     red: 0,
                     green: 0,
                     blue: 0,
@@ -25,12 +37,8 @@ export class RectangleDrop {
             x: this.position.x + vector.x,
             y: this.position.y + vector.y,
         };
-        for (let y = 0; y < this.size.y; y++) {
-            for (let x = 0; x < this.size.x; x++) {
-                console.warn(`${y} ${x}`);
-                pd[this.layer][this.position.y + y][this.position.x + x] =
-                    oc[this.layer][y][x];
-            }
+        for (let i = 0; i < this.view.length; i++) {
+            pd[this.layer][this.position.y + this.view[i].coordinates.y][this.position.x + this.view[i].coordinates.x] = this.view[i].color;
         }
         this.data.write(pd);
     }

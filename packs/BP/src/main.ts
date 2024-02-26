@@ -53,30 +53,21 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       DataStorage.write(data);
       display.data = DataStorage;
 
-      // let vp = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
-      //   x: 2,
-      //   y: 2,
-      // });
-
-      let vp = new rd.Drop({ x: 0, y: 0 }, DataStorage, 1);
+      let vp = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
+        x: 2,
+        y: 2,
+      });
 
       display.startDrawing();
 
       mc.system.runTimeout(() => {
         let it = 0;
         mc.system.runInterval(() => {
-          let color = HSLToRGB(it, 100, 50);
-          vp.setView({
-            red: color[0] / 255,
-            green: color[1] / 255,
-            blue: color[2] / 255,
-            alpha: 1,
-          });
-          it++;
-          if (it > 360) {
-            it = 0;
+          if (it < 4) {
+            vp.move({ x: 1, y: 2 });
           }
-        });
+          it++;
+        }, 5);
       }, 60);
     });
   }
