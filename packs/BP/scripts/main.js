@@ -29,25 +29,19 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
                     }
                 }
             }
-            const v = { red: 1, green: 0, blue: 1, alpha: 1 };
-            const o = { red: 1, green: 0.5, blue: 0, alpha: 1 };
+            const w = { red: 1, green: 1, blue: 1, alpha: 1 };
             const DataStorage = new rd.MassiveJSONStorage("rd:screen_data");
-            data[1][0][0] = v;
-            data[1][0][1] = { red: 0.5, green: 0, blue: 1, alpha: 1 };
-            data[1][1][0] = { red: 0.5, green: 0, blue: 1, alpha: 1 };
-            data[1][1][1] = { red: 0, green: 0, blue: 1, alpha: 1 };
             DataStorage.write(data);
             display.data = DataStorage;
-            let vp = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
-                x: 2,
-                y: 2,
+            let ri = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
+                x: 1,
+                y: 4,
             });
             display.startDrawing();
             mc.system.runTimeout(() => {
                 let it = 0;
                 mc.system.runInterval(() => {
                     if (it < 4) {
-                        vp.move({ x: 1, y: 2 });
                     }
                     it++;
                 }, 5);
