@@ -4,9 +4,9 @@ export class Drop {
         this.position = position;
         this.data = pairedData;
         this.layer = layer;
+        this.view = this.data.access()[this.layer][this.position.y][this.position.x];
     }
     move(vector) {
-        const oldColor = this.data.access()[this.layer][this.position.y][this.position.x];
         let pairedData = this.data.access();
         pairedData[this.layer][this.position.y][this.position.x] = {
             red: 0,
@@ -18,7 +18,13 @@ export class Drop {
             x: this.position.x + vector.x,
             y: this.position.y + vector.y,
         };
-        pairedData[this.layer][this.position.y][this.position.x] = oldColor;
+        pairedData[this.layer][this.position.y][this.position.x] = this.view;
+        this.data.write(pairedData);
+    }
+    setView(rgba) {
+        this.view = rgba;
+        let pairedData = this.data.access();
+        pairedData[this.layer][this.position.y][this.position.x] = this.view;
         this.data.write(pairedData);
     }
 }

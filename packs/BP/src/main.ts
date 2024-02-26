@@ -2,6 +2,16 @@ import * as mc from "@minecraft/server";
 import * as ui from "@minecraft/server-ui";
 import * as rd from "raindrop/mod";
 
+const HSLToRGB = (h, s, l) => {
+  s /= 100;
+  l /= 100;
+  const k = (n) => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n) =>
+    l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  return [255 * f(0), 255 * f(8), 255 * f(4)];
+};
+
 mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
   if (data.id == "rd:start") {
     mc.system.run(() => {
@@ -43,21 +53,30 @@ mc.system.afterEvents.scriptEventReceive.subscribe((data) => {
       DataStorage.write(data);
       display.data = DataStorage;
 
-      let vp = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
-        x: 2,
-        y: 2,
-      });
+      // let vp = new rd.RectangleDrop({ x: 0, y: 0 }, DataStorage, 1, {
+      //   x: 2,
+      //   y: 2,
+      // });
+
+      let vp = new rd.Drop({ x: 0, y: 0 }, DataStorage, 1);
 
       display.startDrawing();
 
       mc.system.runTimeout(() => {
         let it = 0;
         mc.system.runInterval(() => {
-          if (it < 1) {
-            vp.move({ x: 2, y: 0 });
-          }
+          let color = HSLToRGB(it, 100, 50);
+          vp.setView({
+            red: color[0] / 255,
+            green: color[1] / 255,
+            blue: color[2] / 255,
+            alpha: 1,
+          });
           it++;
-        }, 5);
+          if (it > 360) {
+            it = 0;
+          }
+        });
       }, 60);
     });
   }

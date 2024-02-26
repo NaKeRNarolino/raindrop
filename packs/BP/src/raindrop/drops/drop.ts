@@ -6,6 +6,7 @@ export class Drop {
   position: mc.Vector2;
   data: MassiveJSONStorage;
   layer: number;
+  view: mc.RGBA;
   constructor(
     position: mc.Vector2,
     pairedData: MassiveJSONStorage,
@@ -14,12 +15,12 @@ export class Drop {
     this.position = position;
     this.data = pairedData;
     this.layer = layer;
+    this.view = (this.data.access() as mc.RGBA[][][])[this.layer][
+      this.position.y
+    ][this.position.x];
   }
 
   move(vector: mc.Vector2): void {
-    const oldColor: mc.RGBA = (this.data.access() as mc.RGBA[][][])[this.layer][
-      this.position.y
-    ][this.position.x];
     let pairedData = this.data.access() as mc.RGBA[][][];
     pairedData[this.layer][this.position.y][this.position.x] = {
       red: 0,
@@ -31,7 +32,14 @@ export class Drop {
       x: this.position.x + vector.x,
       y: this.position.y + vector.y,
     };
-    pairedData[this.layer][this.position.y][this.position.x] = oldColor;
+    pairedData[this.layer][this.position.y][this.position.x] = this.view;
+    this.data.write(pairedData);
+  }
+
+  setView(rgba: mc.RGBA) {
+    this.view = rgba;
+    let pairedData = this.data.access() as mc.RGBA[][][];
+    pairedData[this.layer][this.position.y][this.position.x] = this.view;
     this.data.write(pairedData);
   }
 }
