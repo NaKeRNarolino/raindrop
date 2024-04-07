@@ -1,5 +1,4 @@
 import * as mc from "@minecraft/server";
-import * as ui from "@minecraft/server-ui";
 import * as rd from "raindrop/mod";
 
 const HSLToRGB = (h, s, l) => {
@@ -113,7 +112,31 @@ mc.system.afterEvents.scriptEventReceive.subscribe((evdata) => {
               { x: 32, y: 1 },
               1
             );
+            let height = Math.random() * 8;
+            display.fillWithColor(
+              { red: 1, green: 1, blue: 0, alpha: 1 },
+              { x: 5, y: 0 },
+              { x: 1, y: height },
+              4
+            );
+
+            height = Math.random() * 8;
+            display.fillWithColor(
+              { red: 1, green: 1, blue: 0, alpha: 1 },
+              { x: 9, y: 0 },
+              { x: 1, y: height },
+              4
+            );
+
+            height = Math.random() * 8;
+            display.fillWithColor(
+              { red: 1, green: 1, blue: 0, alpha: 1 },
+              { x: 14, y: 0 },
+              { x: 1, y: height },
+              4
+            );
           }
+
           if (player.collidesWithLayer(1)) {
             display.fillWithColor(
               { red: 1, green: 1, blue: 1, alpha: 1 },
